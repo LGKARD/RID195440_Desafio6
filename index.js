@@ -1,18 +1,12 @@
 import express from "express";
+import produtoRoutes from "./src/routes/produto.routes.js";
 
 const app = express();
 app.use(express.json());
 
+app.use(produtoRoutes);
 
-app.get("/", (req, res) => {
-    res.send("Hello World!");
-});
-app.post("/user", (req, res) => {
-    const user = []
-    const body = req.body
-    user.push(body)
-    res.send(user)
-})
+
 
 
 
