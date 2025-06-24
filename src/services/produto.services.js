@@ -7,6 +7,19 @@ async function createProdutoService(newProduto) {
     return produto;
 }
 
+async function findAllProdutosService() {
+    const produtos = await produtoRepository.findAllProdutosRepository();
+    return produtos;
+}
+
+async function findProdutoByIdService(id) {
+    const produto = await produtoRepository.findProdutoByIdRepository(id);
+    if (!produto) throw new Error("Produto não encontrado");
+    return produto;
+}
+
 export default {
-    createProdutoService
+    createProdutoService,
+    findAllProdutosService,
+    findProdutoByIdService
 }
