@@ -8,4 +8,6 @@ const produtoSchema = z.object({
     descricao: z.string().min(3, 'A descrição deve ter no mínimo 3 caracteres').max(255, 'A descrição deve ter no máximo 255 caracteres').optional()
 });
 
-export {produtoSchema};
+const produtoIdSchema = z.object({ id: z.number().int().positive('O ID do produto deve ser um número inteiro positivo') });
+
+export {produtoSchema, produtoIdSchema};

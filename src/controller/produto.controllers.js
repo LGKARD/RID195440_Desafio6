@@ -41,9 +41,20 @@ async function updateProdutoController(req, res) {
     }
 }
 
+async function deleteProdutoController(req, res) {
+    const id = req.params.id;
+    try {
+        const message = await produtoServices.deleteProdutoService(id);
+        res.status(200).json({ message: message });
+    } catch (error) {
+        res.status(404).json({ error: error.message });
+    }
+}
+
 export default {
     createProdutoController,
     findProdutoByIdController,
     findAllProdutoController,
-    updateProdutoController
+    updateProdutoController,
+    deleteProdutoController
 }
