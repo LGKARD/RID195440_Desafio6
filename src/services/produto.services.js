@@ -18,8 +18,16 @@ async function findProdutoByIdService(id) {
     return produto;
 }
 
+async function updateProdutoService(id, newProduto) {
+    const foundProduto = await produtoRepository.findProdutoByIdRepository(id);
+    if (!foundProduto) throw new Error("Produto não encontrado");
+    const produto = await produtoRepository.updateProdutoRepository(id, newProduto);
+    return produto;
+}
+
 export default {
     createProdutoService,
     findAllProdutosService,
-    findProdutoByIdService
+    findProdutoByIdService,
+    updateProdutoService
 }

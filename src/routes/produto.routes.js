@@ -8,5 +8,6 @@ const router = Router();
 router.post("/produto", validate(produtoSchema), produtoControllers.createProdutoController);
 router.get("/produto/:id", produtoControllers.findProdutoByIdController);
 router.get("/produto", produtoControllers.findAllProdutoController);
+router.put("/produto/:id", validate(produtoSchema), produtoControllers.updateProdutoController);
 
 export default router;

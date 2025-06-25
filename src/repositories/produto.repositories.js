@@ -60,10 +60,26 @@ function findAllProdutosRepository() {
     });
 }
 
+function updateProdutoRepository(id, newProduto) {
+    return new Promise((resolve, reject) => {
+        const { nome_produto, preco, categoria, qtde_estoque, descricao } = newProduto;
+        db.run(`UPDATE produtos SET nome_produto = ?, preco = ?, categoria = ?, qtde_estoque = ?, descricao = ? WHERE id = ?`,
+            [nome_produto, preco, categoria, qtde_estoque, descricao, id],
+            function (err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve({ id, ...newProduto });
+                }
+            });
+    });
+}
+
 
 export default {
     createProdutoRepository,
     findProdutoByNameRepository,
     findProdutoByIdRepository,
-    findAllProdutosRepository
+    findAllProdutosRepository,
+    updateProdutoRepository
 }

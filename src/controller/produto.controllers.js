@@ -30,8 +30,20 @@ async function findAllProdutoController(req, res) {
     }
 }
 
+async function updateProdutoController(req, res) {
+    const id = req.params.id;
+    const newProduto = req.body;
+    try {
+        const produto = await produtoServices.updateProdutoService(id, newProduto);
+        res.status(200).json(produto);
+    } catch (error) {
+        res.status(404).json({ error: error.message });
+    }
+}
+
 export default {
     createProdutoController,
     findProdutoByIdController,
-    findAllProdutoController
+    findAllProdutoController,
+    updateProdutoController
 }
