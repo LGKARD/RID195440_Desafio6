@@ -1,6 +1,16 @@
 import pedidoRepositories from "../repositories/pedido.repositories.js";
+import clienteRepository from "../repositories/cliente.repositories.js";
+import produtoRepository from "../repositories/produto.repositories.js";
 
 async function createPedidoService(newPedido) {
+    const { id_cliente, id_produto } = newPedido;
+    
+    const foundCliente = await clienteRepository.findClienteByIdRepository(id_cliente);
+    if (!foundCliente) throw new Error("Cliente não encontrado");
+
+    const foundProduto = await produtoRepository.findProdutoByIdRepository(id_produto);
+    if (!foundProduto) throw new Error("Produto não encontrado");
+
     const pedido = await pedidoRepositories.createPedidoRepository(newPedido);
     return pedido;
 }

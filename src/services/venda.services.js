@@ -1,6 +1,12 @@
 import vendaRepository from "../repositories/venda.repositories.js";
+import pedidoRepository from "../repositories/pedido.repositories.js";
 
 export async function createVendaService(newVenda) {
+    const { pedido_id } = newVenda;
+
+    const foundPedido = await pedidoRepository.findPedidoByIdRepository(pedido_id);
+    if (!foundPedido) throw new Error("Pedido não encontrado");
+
     const venda = await vendaRepository.createVendaRepository(newVenda);
     return venda;
 }
