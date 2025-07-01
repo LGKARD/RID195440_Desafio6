@@ -2,6 +2,7 @@ import pedidoServices from "../services/pedido.services.js";
 
 async function createPedidoController(req, res) {
     const newPedido = req.body;
+    console.log("🔍 Pedido recebido:", newPedido);
     try {
         const pedido = await pedidoServices.createPedidoService(newPedido);
         res.status(201).json(pedido);

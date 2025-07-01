@@ -4,15 +4,14 @@ db.run(`CREATE TABLE IF NOT EXISTS vendas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     pedido_id INTEGER NOT NULL,
     data_venda TEXT NOT NULL,
-    valor_total REAL NOT NULL,
     FOREIGN KEY (pedido_id) REFERENCES pedidos(id)
 )`);
 
 function createVendaRepository(newVenda) {
     return new Promise((resolve, reject) => {
-        const { pedido_id, data_venda, valor_total } = newVenda;
-        db.run(`INSERT INTO vendas (pedido_id, data_venda, valor_total) VALUES (?, ?, ?)`,
-            [pedido_id, data_venda, valor_total],
+        const { pedido_id, data_venda } = newVenda;
+        db.run(`INSERT INTO vendas (pedido_id, data_venda) VALUES (?, ?, ?)`,
+            [pedido_id, data_venda],
             function (err) {
                 if (err) {
                     reject(err);
@@ -49,9 +48,9 @@ function findAllVendasRepository() {
 
 function updateVendaRepository(id, newVenda) {
     return new Promise((resolve, reject) => {
-        const { pedido_id, data_venda, valor_total } = newVenda;
-        db.run(`UPDATE vendas SET pedido_id = ?, data_venda = ?, valor_total = ? WHERE id = ?`,
-            [pedido_id, data_venda, valor_total, id],
+        const { pedido_id, data_venda } = newVenda;
+        db.run(`UPDATE vendas SET pedido_id = ?, data_venda = ? WHERE id = ?`,
+            [pedido_id, data_venda, id],
             function (err) {
                 if (err) {
                     reject(err);
