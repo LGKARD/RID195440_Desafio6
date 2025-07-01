@@ -13,3 +13,5 @@ async function updateEstoqueService(id_produto, newEstoque) {
     const estoque = await estoqueRepositories.updateEstoqueRepository(id_produto, newEstoque);
     return estoque;
 }
+
+export default { findEstoqueByProdutoIdService, updateEstoqueService };
