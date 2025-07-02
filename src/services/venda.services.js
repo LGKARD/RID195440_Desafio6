@@ -7,7 +7,15 @@ export async function createVendaService(newVenda) {
     const foundPedido = await pedidoRepository.findPedidoByIdRepository(pedido_id);
     if (!foundPedido) throw new Error("Pedido não encontrado");
 
-    const venda = await vendaRepository.createVendaRepository(newVenda);
+    const vendas = await vendaRepository.findAllVendasRepository();
+    const jaVendido = vendas.find(v => v.pedido_id === pedido_id);
+
+    if (jaVendido) {
+        throw new Error("Este pedido já foi vendido");
+    }
+
+    const data_venda = new Date().toISOString().split("T")[0];
+    const venda = await vendaRepository.createVendaRepository({pedido_id, data_venda});
     return venda;
 }
 

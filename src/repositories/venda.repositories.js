@@ -10,7 +10,7 @@ db.run(`CREATE TABLE IF NOT EXISTS vendas (
 function createVendaRepository(newVenda) {
     return new Promise((resolve, reject) => {
         const { pedido_id, data_venda } = newVenda;
-        db.run(`INSERT INTO vendas (pedido_id, data_venda) VALUES (?, ?, ?)`,
+        db.run(`INSERT INTO vendas (pedido_id, data_venda) VALUES (?, ?)`,
             [pedido_id, data_venda],
             function (err) {
                 if (err) {
